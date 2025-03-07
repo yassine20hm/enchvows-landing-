@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <style>
+        /* Basic reset and styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #472033 0%, #2c1522 100%); /* Burgundy gradient background */
+            color: #fff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fff; /* White logo */
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: #dbe2ef; /* Light blue for tagline */
+        }
+        
+        .url-form {
+            background: linear-gradient(145deg, #5a2a42 0%, #472033 100%); /* Lighter burgundy gradient */
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .form-control {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+        
+        input[type="url"] {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        button {
+            background: linear-gradient(to right, #112d4e, #3f72af); /* Blue gradient button */
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:hover {
+            background: linear-gradient(to right, #1a3d5c, #4f82bf); /* Lighter blue gradient on hover */
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .result {
+            display: none;
+            background: linear-gradient(145deg, #5a2a42 0%, #472033 100%); /* Lighter burgundy gradient */
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .result-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #dbe2ef; /* Light blue text */
+        }
+        
+        .short-url {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            background: linear-gradient(145deg, #3d1b2a 0%, #2c1522 100%); /* Darker burgundy gradient */
+            color: white;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .short-url span {
+            flex: 1;
+            word-break: break-all;
+        }
+        
+        .copy-button {
+            background: linear-gradient(to right, #112d4e, #3f72af); /* Blue gradient button */
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            margin-left: 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .copy-button:hover {
+            background: linear-gradient(to right, #1a3d5c, #4f82bf); /* Lighter blue gradient on hover */
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .feature {
+            background: linear-gradient(145deg, #5a2a42 0%, #472033 100%); /* Lighter burgundy gradient */
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #dbe2ef; /* Light blue icon */
+        }
+        
+        .feature-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #dbe2ef; /* Light blue title */
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: #dbe2ef; /* Light text */
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        
+        @media (max-width: 600px) {
+            .form-control {
+                flex-direction: column;
+            }
+            
+            input[type="url"] {
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">URLShort</div>
+            <div class="tagline">Make your long URLs short and trackable</div>
+        </header>
+        
+        <div class="url-form">
+            <div class="form-control">
+                <input type="url" id="long-url" placeholder="Paste your long URL here..." required>
+                <button id="shorten-button">Shorten URL</button>
+            </div>
+        </div>
+        
+        <div class="result" id="result-box">
+            <div class="result-title">Your shortened URL</div>
+            <div class="short-url">
+                <span id="short-url-text"></span>
+                <button class="copy-button" id="copy-button">Copy</button>
+            </div>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">Fast & Easy</div>
+                <p>Shorten your URLs in seconds with just one click.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📊</div>
+                <div class="feature-title">Track Clicks</div>
+                <p>Monitor how many people click on your shortened links.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔒</div>
+                <div class="feature-title">Secure</div>
+                <p>All your links and data are safe with us.</p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2025 URLShort. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Simple demo functionality (In a real app, this would connect to a backend)
+        document.addEventListener('DOMContentLoaded', function() {
+            const shortenButton = document.getElementById('shorten-button');
+            const longUrlInput = document.getElementById('long-url');
+            const resultBox = document.getElementById('result-box');
+            const shortUrlText = document.getElementById('short-url-text');
+            const copyButton = document.getElementById('copy-button');
+            
+            shortenButton.addEventListener('click', function() {
+                const longUrl = longUrlInput.value;
+                
+                if (!longUrl) {
+                    alert('Please enter a URL');
+                    return;
+                }
+                
+                if (!isValidUrl(longUrl)) {
+                    alert('Please enter a valid URL');
+                    return;
+                }
+                
+                // Generate a random short code (in a real app, this would be done on the server)
+                const shortCode = generateRandomCode(6);
+                const shortUrl = `https://urlshort.com/${shortCode}`;
+                
+                shortUrlText.textContent = shortUrl;
+                resultBox.style.display = 'block';
+            });
+            
+            copyButton.addEventListener('click', function() {
+                const textToCopy = shortUrlText.textContent;
+                navigator.clipboard.writeText(textToCopy)
+                    .then(() => {
+                        copyButton.textContent = 'Copied!';
+                        setTimeout(() => {
+                            copyButton.textContent = 'Copy';
+                        }, 2000);
+                    })
+                    .catch(err => {
+                        console.error('Failed to copy: ', err);
+                    });
+            });
+            
+            function isValidUrl(string) {
+                try {
+                    new URL(string);
+                    return true;
+                } catch (_) {
+                    return false;
+                }
+            }
+            
+            function generateRandomCode(length) {
+                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                let result = '';
+                for (let i = 0; i < length; i++) {
+                    result += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                return result;
+            }
+        });
+    </script>
+</body>
+</html>
