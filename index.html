@@ -251,7 +251,7 @@
                 
                 // Generate a random short code (in a real app, this would be done on the server)
                 const shortCode = generateRandomCode(6);
-                const shortUrl = `https://urlshort.com/${shortCode}`;
+                const shortUrl = `${window.location.origin}/${shortCode}`;
                 
                 shortUrlText.textContent = shortUrl;
                 resultBox.style.display = 'block';
