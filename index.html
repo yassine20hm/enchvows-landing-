@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>URLW - Smart Links for Content Creators</title>
+    <title>URL Shortener</title>
     <style>
         /* Basic reset and styles */
         * {
@@ -14,7 +14,7 @@
         }
         
         body {
-            background-color: #1e3a70; /* Dark blue background */
+            background-color: #2c1522; /* Base background color */
             color: #fff;
             line-height: 1.6;
             min-height: 100vh;
@@ -31,13 +31,13 @@
             right: 0;
             bottom: 0;
             background-image: 
-                linear-gradient(rgba(40, 65, 120, 0.3) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(40, 65, 120, 0.3) 1px, transparent 1px);
+                linear-gradient(rgba(72, 32, 51, 0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(72, 32, 51, 0.3) 1px, transparent 1px);
             background-size: 40px 40px;
             z-index: -2;
         }
         
-        /* Deep blue blur effect */
+        /* Deep purple blur effect */
         body::after {
             content: '';
             position: absolute;
@@ -46,7 +46,7 @@
             transform: translate(-50%, -50%);
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(25, 80, 180, 0.4) 0%, rgba(25, 80, 180, 0.1) 40%, transparent 70%);
+            background: radial-gradient(circle, rgba(128, 0, 128, 0.4) 0%, rgba(128, 0, 128, 0.1) 40%, transparent 70%);
             filter: blur(90px);
             z-index: -1;
         }
@@ -78,7 +78,7 @@
         }
         
         .url-form {
-            background: linear-gradient(145deg, #2a4580 0%, #1a3366 100%); /* Blue gradient */
+            background: linear-gradient(145deg, #5a2a42 0%, #472033 100%); /* Lighter burgundy gradient */
             padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
@@ -121,7 +121,7 @@
         
         .result {
             display: none;
-            background: linear-gradient(145deg, #2a4580 0%, #1a3366 100%); /* Blue gradient */
+            background: linear-gradient(145deg, #5a2a42 0%, #472033 100%); /* Lighter burgundy gradient */
             padding: 1.5rem;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
@@ -142,7 +142,7 @@
             padding: 0.8rem;
             border-radius: 4px;
             margin-bottom: 1rem;
-            background: linear-gradient(145deg, #1a3366 0%, #112850 100%); /* Darker blue gradient */
+            background: linear-gradient(145deg, #3d1b2a 0%, #2c1522 100%); /* Darker burgundy gradient */
             color: white;
             box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
         }
@@ -165,35 +165,15 @@
             background: linear-gradient(to right, #1a3d5c, #4f82bf); /* Lighter blue gradient on hover */
         }
         
-        .info-section {
-            background: linear-gradient(145deg, #2a4580 0%, #1a3366 100%);
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            margin-bottom: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .info-section h2 {
-            color: #fff;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-        }
-        
-        .info-section p {
-            margin-bottom: 1rem;
-        }
-        
         .features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
-            margin-top: 1.5rem;
+            margin-top: 3rem;
         }
         
         .feature {
-            background: linear-gradient(145deg, #2a4580 0%, #1a3366 100%); /* Blue gradient */
+            background: linear-gradient(145deg, #5a2a42 0%, #472033 100%); /* Lighter burgundy gradient */
             padding: 1.5rem;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
@@ -220,9 +200,37 @@
             color: #dbe2ef; /* Light blue title */
         }
         
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: #dbe2ef; /* Light text */
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Added styles for URLW sections */
+        .info-section {
+            background: linear-gradient(145deg, #5a2a42 0%, #472033 100%);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .info-section h2 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .info-section p {
+            margin-bottom: 1rem;
+        }
+        
         .features-list {
-            margin: 2rem 0;
-            list-style-position: inside;
+            margin: 1rem 0;
+            list-style-type: none;
         }
         
         .features-list li {
@@ -241,7 +249,7 @@
         }
         
         .how-to {
-            margin-top: 3rem;
+            margin-top: 2rem;
         }
         
         .step {
@@ -249,23 +257,16 @@
         }
         
         .step-number {
-            color: #7dade2;
+            color: #dbe2ef;
             font-weight: bold;
             margin-right: 0.5rem;
         }
         
         .step-title {
-            color: #7dade2;
+            color: #dbe2ef;
             font-size: 1.3rem;
             font-weight: bold;
             margin-bottom: 0.5rem;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 3rem;
-            color: #dbe2ef; /* Light text */
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
         
         @media (max-width: 600px) {
@@ -282,29 +283,30 @@
 <body>
     <div class="container">
         <header>
-            <div class="logo">URLW</div>
-            <div class="tagline">Smart links for content creators</div>
+            <div class="logo">URLShort</div>
+            <div class="tagline">Make your long URLs short and trackable</div>
         </header>
         
         <div class="url-form">
             <div class="form-control">
                 <input type="url" id="long-url" placeholder="Paste your long URL here..." required>
-                <button id="shorten-button">Make It Short</button>
+                <button id="shorten-button">Shorten URL</button>
             </div>
         </div>
         
         <div class="result" id="result-box">
-            <div class="result-title">Your smart URLW link</div>
+            <div class="result-title">Your shortened URL</div>
             <div class="short-url">
                 <span id="short-url-text"></span>
                 <button class="copy-button" id="copy-button">Copy</button>
             </div>
         </div>
         
+        <!-- Added URLW content sections -->
         <div class="info-section">
             <h2>What is URLW?</h2>
             <p>URLW is more than just a URL shortener. It's a powerful tool designed specifically for content creators, YouTubers, and social media influencers who want to grow their audience and boost engagement. Our smart link technology doesn't just make your links shorter - it makes them smarter.</p>
-            <p>Imagine sharing a YouTube video link that opens directly in the YouTube app, or an Instagram post that launches instantly in the Instagram app. That's the magic of URLW! Our unique app-opening links create a seamless experience for your followers, making it easier than ever for them to engage with your content, subscribe to your channel, or follow your profile.</p>
+            <p>Imagine sharing a Youtube video link that opens directly in the YouTube app, or an Instagram post that launches instantly in the Instagram app. That's the magic of URLW! Our unique app-opening links create a seamless experience for your followers, making it easier than ever for them to engage with your content, subscribe to your channel, or follow your profile.</p>
             <p>For YouTubers, URLW is a game-changer. When you share a URLW link to your latest video, viewers are taken straight into the YouTube app. This means they're more likely to subscribe, like, and comment, helping you grow your channel faster. Instagram influencers, TikTok creators, and Twitter personalities can all benefit from our smart linking technology, ensuring your audience gets to your content in the most efficient way possible.</p>
             <p>Best of all, URLW is incredibly easy to use. There's no need to sign up or create an account. Just paste your long URL, click a button, and you'll have a smart, short link ready to share. It's the fastest, most efficient way to share your content and grow your online presence.</p>
         </div>
@@ -342,22 +344,22 @@
             <div class="feature">
                 <div class="feature-icon">⚡</div>
                 <div class="feature-title">Fast & Easy</div>
-                <p>Create app-opening smart links in seconds with just one click.</p>
+                <p>Shorten your URLs in seconds with just one click.</p>
             </div>
             <div class="feature">
-                <div class="feature-icon">📱</div>
-                <div class="feature-title">App Direct</div>
-                <p>Links open directly in native apps for a better user experience.</p>
+                <div class="feature-icon">📊</div>
+                <div class="feature-title">Track Clicks</div>
+                <p>Monitor how many people click on your shortened links.</p>
             </div>
             <div class="feature">
-                <div class="feature-icon">🔍</div>
-                <div class="feature-title">Analytics</div>
-                <p>Track clicks and see how your audience engages with your content.</p>
+                <div class="feature-icon">🔒</div>
+                <div class="feature-title">Secure</div>
+                <p>All your links and data are safe with us.</p>
             </div>
         </div>
         
         <footer>
-            <p>&copy; 2025 URLW. All rights reserved.</p>
+            <p>&copy; 2025 URLShort. All rights reserved.</p>
         </footer>
     </div>
     
