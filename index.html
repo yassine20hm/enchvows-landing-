@@ -14,16 +14,49 @@
         }
         
         body {
-            background: linear-gradient(135deg, #472033 0%, #2c1522 100%); /* Burgundy gradient background */
+            background-color: #2c1522; /* Base background color */
             color: #fff;
             line-height: 1.6;
             min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Sophisticated grid background */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(72, 32, 51, 0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(72, 32, 51, 0.3) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -2;
+        }
+        
+        /* Deep purple blur effect */
+        body::after {
+            content: '';
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(128, 0, 128, 0.4) 0%, rgba(128, 0, 128, 0.1) 40%, transparent 70%);
+            filter: blur(90px);
+            z-index: -1;
         }
         
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 2rem;
+            position: relative;
+            z-index: 1;
         }
         
         header {
@@ -51,6 +84,7 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             margin-bottom: 2rem;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
         }
         
         .form-control {
@@ -93,6 +127,7 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             color: white;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
         }
         
         .result-title {
@@ -146,6 +181,7 @@
             color: white;
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: transform 0.3s ease;
+            backdrop-filter: blur(5px);
         }
         
         .feature:hover {
