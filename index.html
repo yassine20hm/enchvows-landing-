@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>URL Shortener</title>
     <style>
         /* Basic reset and styles */
         * {
@@ -221,45 +221,45 @@
 <body>
     <div class="container">
         <header>
-            <div class="logo"></div>
-            <div class="tagline"></div>
+            <div class="logo">URLShort</div>
+            <div class="tagline">Make your long URLs short and trackable</div>
         </header>
         
         <div class="url-form">
             <div class="form-control">
-                <input type="url" id="long-url" placeholder="" required>
-                <button id="shorten-button"></button>
+                <input type="url" id="long-url" placeholder="Paste your long URL here..." required>
+                <button id="shorten-button">Shorten URL</button>
             </div>
         </div>
         
         <div class="result" id="result-box">
-            <div class="result-title"></div>
+            <div class="result-title">Your shortened URL</div>
             <div class="short-url">
                 <span id="short-url-text"></span>
-                <button class="copy-button" id="copy-button"></button>
+                <button class="copy-button" id="copy-button">Copy</button>
             </div>
         </div>
         
         <div class="features">
             <div class="feature">
-                <div class="feature-icon"></div>
-                <div class="feature-title"></div>
-                <p></p>
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">Fast & Easy</div>
+                <p>Shorten your URLs in seconds with just one click.</p>
             </div>
             <div class="feature">
-                <div class="feature-icon"></div>
-                <div class="feature-title"></div>
-                <p></p>
+                <div class="feature-icon">📊</div>
+                <div class="feature-title">Track Clicks</div>
+                <p>Monitor how many people click on your shortened links.</p>
             </div>
             <div class="feature">
-                <div class="feature-icon"></div>
-                <div class="feature-title"></div>
-                <p></p>
+                <div class="feature-icon">🔒</div>
+                <div class="feature-title">Secure</div>
+                <p>All your links and data are safe with us.</p>
             </div>
         </div>
         
         <footer>
-            <p></p>
+            <p>&copy; 2025 URLShort. All rights reserved.</p>
         </footer>
     </div>
     
@@ -276,12 +276,12 @@
                 const longUrl = longUrlInput.value;
                 
                 if (!longUrl) {
-                    alert('');
+                    alert('Please enter a URL');
                     return;
                 }
                 
                 if (!isValidUrl(longUrl)) {
-                    alert('');
+                    alert('Please enter a valid URL');
                     return;
                 }
                 
@@ -297,9 +297,9 @@
                 const textToCopy = shortUrlText.textContent;
                 navigator.clipboard.writeText(textToCopy)
                     .then(() => {
-                        copyButton.textContent = '';
+                        copyButton.textContent = 'Copied!';
                         setTimeout(() => {
-                            copyButton.textContent = '';
+                            copyButton.textContent = 'Copy';
                         }, 2000);
                     })
                     .catch(err => {
