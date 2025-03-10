@@ -3,328 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>URL Shortener</title>
+    <title>Domain Available | Contact Me</title>
     <style>
-        /* Basic reset and styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background-color: #2c1522; /* Base background color */
-            color: #fff;
-            line-height: 1.6;
+            background: linear-gradient(135deg, #ff427f 0%, #ff427f 20%, #ffa66b 50%, #ffd36b 70%, #9d4edd 100%);
             min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        /* Sophisticated grid background */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                linear-gradient(rgba(72, 32, 51, 0.3) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(72, 32, 51, 0.3) 1px, transparent 1px);
-            background-size: 40px 40px;
-            z-index: -2;
-        }
-        
-        /* Deep purple blur effect */
-        body::after {
-            content: '';
-            position: absolute;
-            top: 30%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(128, 0, 128, 0.4) 0%, rgba(128, 0, 128, 0.1) 40%, transparent 70%);
-            filter: blur(90px);
-            z-index: -1;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            position: relative;
-            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            color: white;
         }
         
         header {
-            text-align: center;
-            margin-bottom: 2rem;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
         .logo {
-            font-size: 2.5rem;
+            font-size: 28px;
             font-weight: bold;
-            color: #fff; /* White logo */
-            margin-bottom: 0.5rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
         
-        .tagline {
-            font-size: 1.2rem;
-            color: #dbe2ef; /* Light blue for tagline */
-        }
-        
-        .url-form {
-            background: linear-gradient(145deg, #5a2a42 0%, #472033 100%); /* Lighter burgundy gradient */
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            margin-bottom: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-        }
-        
-        .form-control {
+        nav ul {
             display: flex;
-            margin-bottom: 1rem;
+            list-style: none;
+            gap: 30px;
         }
         
-        input[type="url"] {
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .search-icon {
+            font-size: 20px;
+        }
+        
+        main {
             flex: 1;
-            padding: 0.8rem;
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        
-        button {
-            background: linear-gradient(to right, #112d4e, #3f72af); /* Blue gradient button */
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 4px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        
-        button:hover {
-            background: linear-gradient(to right, #1a3d5c, #4f82bf); /* Lighter blue gradient on hover */
-            transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-        
-        .result {
-            display: none;
-            background: linear-gradient(145deg, #5a2a42 0%, #472033 100%); /* Lighter burgundy gradient */
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-        }
-        
-        .result-title {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: #dbe2ef; /* Light blue text */
-        }
-        
-        .short-url {
             display: flex;
             align-items: center;
-            padding: 0.8rem;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-            background: linear-gradient(145deg, #3d1b2a 0%, #2c1522 100%); /* Darker burgundy gradient */
+            padding: 0 5%;
+        }
+        
+        .content {
+            width: 50%;
+            padding-right: 40px;
+        }
+        
+        h1 {
+            font-size: 80px;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+        
+        p {
+            margin-bottom: 30px;
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .contact-btn {
+            display: inline-block;
+            background: linear-gradient(to right, #ff427f, #ff7c55);
             color: white;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        
-        .short-url span {
-            flex: 1;
-            word-break: break-all;
-        }
-        
-        .copy-button {
-            background: linear-gradient(to right, #112d4e, #3f72af); /* Blue gradient button */
-            color: white;
-            border: none;
-            padding: 0.5rem;
-            margin-left: 0.5rem;
-            border-radius: 4px;
-        }
-        
-        .copy-button:hover {
-            background: linear-gradient(to right, #1a3d5c, #4f82bf); /* Lighter blue gradient on hover */
-        }
-        
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 3rem;
-        }
-        
-        .feature {
-            background: linear-gradient(145deg, #5a2a42 0%, #472033 100%); /* Lighter burgundy gradient */
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255, 66, 127, 0.3);
             transition: transform 0.3s ease;
-            backdrop-filter: blur(5px);
         }
         
-        .feature:hover {
-            transform: translateY(-5px);
+        .contact-btn:hover {
+            transform: translateY(-3px);
         }
         
-        .feature-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: #dbe2ef; /* Light blue icon */
+        .image-container {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
         
-        .feature-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: #dbe2ef; /* Light blue title */
+        .circle-image {
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .circle-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .floating-dot {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 6s infinite ease-in-out;
+        }
+        
+        .dot-1 {
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 165, 0, 0.8);
+            top: 30%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .dot-2 {
+            width: 50px;
+            height: 50px;
+            background: rgba(157, 78, 221, 0.8);
+            bottom: 20%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+        
+        .dot-3 {
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 66, 127, 0.8);
+            top: 20%;
+            right: 20%;
+            animation-delay: 1s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
         }
         
         footer {
-            text-align: center;
-            margin-top: 3rem;
-            color: #dbe2ef; /* Light text */
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            padding: 30px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
-        @media (max-width: 600px) {
-            .form-control {
+        .social-icons {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .social-icons a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+        }
+        
+        .share-text {
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            main {
                 flex-direction: column;
+                text-align: center;
             }
             
-            input[type="url"] {
-                margin-bottom: 1rem;
+            .content, .image-container {
+                width: 100%;
+                padding: 20px 0;
+            }
+            
+            h1 {
+                font-size: 50px;
+            }
+            
+            .circle-image {
+                width: 300px;
+                height: 300px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo">URLShort</div>
-            <div class="tagline">Make your long URLs short and trackable</div>
-        </header>
-        
-        <div class="url-form">
-            <div class="form-control">
-                <input type="url" id="long-url" placeholder="Paste your long URL here..." required>
-                <button id="shorten-button">Shorten URL</button>
-            </div>
-        </div>
-        
-        <div class="result" id="result-box">
-            <div class="result-title">Your shortened URL</div>
-            <div class="short-url">
-                <span id="short-url-text"></span>
-                <button class="copy-button" id="copy-button">Copy</button>
-            </div>
-        </div>
-        
-        <div class="features">
-            <div class="feature">
-                <div class="feature-icon">⚡</div>
-                <div class="feature-title">Fast & Easy</div>
-                <p>Shorten your URLs in seconds with just one click.</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">📊</div>
-                <div class="feature-title">Track Clicks</div>
-                <p>Monitor how many people click on your shortened links.</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🔒</div>
-                <div class="feature-title">Secure</div>
-                <p>All your links and data are safe with us.</p>
-            </div>
-        </div>
-        
-        <footer>
-            <p>&copy; 2025 URLShort. All rights reserved.</p>
-        </footer>
-    </div>
+    <header>
+        <div class="logo">enchvows</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#"></a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="search-icon">🔍</div>
+    </header>
     
-    <script>
-        // Simple demo functionality (In a real app, this would connect to a backend)
-        document.addEventListener('DOMContentLoaded', function() {
-            const shortenButton = document.getElementById('shorten-button');
-            const longUrlInput = document.getElementById('long-url');
-            const resultBox = document.getElementById('result-box');
-            const shortUrlText = document.getElementById('short-url-text');
-            const copyButton = document.getElementById('copy-button');
-            
-            shortenButton.addEventListener('click', function() {
-                const longUrl = longUrlInput.value;
-                
-                if (!longUrl) {
-                    alert('Please enter a URL');
-                    return;
-                }
-                
-                if (!isValidUrl(longUrl)) {
-                    alert('Please enter a valid URL');
-                    return;
-                }
-                
-                // Generate a random short code (in a real app, this would be done on the server)
-                const shortCode = generateRandomCode(6);
-                const shortUrl = `${window.location.origin}/${shortCode}`;
-                
-                shortUrlText.textContent = shortUrl;
-                resultBox.style.display = 'block';
-            });
-            
-            copyButton.addEventListener('click', function() {
-                const textToCopy = shortUrlText.textContent;
-                navigator.clipboard.writeText(textToCopy)
-                    .then(() => {
-                        copyButton.textContent = 'Copied!';
-                        setTimeout(() => {
-                            copyButton.textContent = 'Copy';
-                        }, 2000);
-                    })
-                    .catch(err => {
-                        console.error('Failed to copy: ', err);
-                    });
-            });
-            
-            function isValidUrl(string) {
-                try {
-                    new URL(string);
-                    return true;
-                } catch (_) {
-                    return false;
-                }
-            }
-            
-            function generateRandomCode(length) {
-                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-                let result = '';
-                for (let i = 0; i < length; i++) {
-                    result += characters.charAt(Math.floor(Math.random() * characters.length));
-                }
-                return result;
-            }
-        });
-    </script>
+    <main>
+        <div class="content">
+            <h1>Domain Name Available</h1>
+            <p>This premium domain name could be yours! Perfect for your business, brand, or personal project. Contact me now to secure this unique web address before someone else does.</p>
+            <a href="mailto:yassinehamoche17@gmail.com" class="contact-btn">Contact Me</a>
+        </div>
+        
+        <div class="image-container">
+            <div class="floating-dot dot-1"></div>
+            <div class="floating-dot dot-2"></div>
+            <div class="floating-dot dot-3"></div>
+            <div class="circle-image">
+                <img src="/api//400/400" alt="Domain image" />
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="social-icons">
+            <a href="#">🐦</a>
+            <a href="#">📘</a>
+            <a href="#">📷</a>
+        </div>
+        <div class="share-text">share</div>
+    </footer>
 </body>
 </html>
